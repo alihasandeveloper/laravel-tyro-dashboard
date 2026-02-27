@@ -63,10 +63,10 @@ return [
         'logo' => env('TYRO_DASHBOARD_LOGO', null),
         'logo_height' => env('TYRO_DASHBOARD_LOGO_HEIGHT', '32px'),
         'favicon' => env('TYRO_DASHBOARD_FAVICON', null),
-        
+
         // Sidebar colors (supports any CSS color value: hex, rgb, hsl, etc.)
-        'sidebar_bg' =>  env('TYRO_DASHBOARD_SIDEBAR_BG',null), // Custom background color for sidebar
-        'sidebar_text' => env('TYRO_DASHBOARD_SIDEBAR_TEXT',null), // Custom text color for sidebar
+        'sidebar_bg' => env('TYRO_DASHBOARD_SIDEBAR_BG', null), // Custom background color for sidebar
+        'sidebar_text' => env('TYRO_DASHBOARD_SIDEBAR_TEXT', null), // Custom text color for sidebar
     ],
 
     /*
@@ -227,6 +227,34 @@ return [
                 'is_published' => ['type' => 'boolean', 'label' => 'Published'],
             ],
         ],
+
+        'products' => [
+            'model' => 'App\Models\Product',
+            'title' => 'Products',
+            'fields' => [
+                'title' => ['type' => 'text', 'label' => 'Title', 'rules' => 'required'],
+                'show_in_category' => ['type' => 'boolean', 'label' => 'Show in Category'],
+                'image' => ['type' => 'file', 'label' => 'Image'],
+                'description' => ['type' => 'textarea', 'label' => 'Description'],
+                'category_id' => [
+                    'type' => 'select',
+                    'label' => 'Category',
+                    'relationship' => 'category',
+                    'option_label' => 'name',
+                ],
+                'is_published' => ['type' => 'boolean', 'label' => 'Published'],
+            ],
+        ],
+
+        'categories' => [
+            'model' => 'App\Models\Category',
+            'title' => 'Categories',
+            'fields' => [
+                'name' => ['type' => 'text', 'label' => 'Name', 'rules' => 'required'],
+                'slug' => ['type' => 'text', 'label' => 'Slug', 'rules' => 'required'],
+            ],
+        ],
+
     ],
 
     /*
