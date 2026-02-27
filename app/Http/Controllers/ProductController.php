@@ -13,6 +13,16 @@ class ProductController extends Controller
     public function index()
     {
         //
+        $products = Product::query()
+            ->when(request('category_id'), function ($query, $category_id) {
+                $query->where('category_id', $category_id);
+            })
+            ->when(request('is_published'), function ($query, $is_published) {
+                $query->where('is_published', $is_published);
+            })
+            ->paginate(10);
+
+        return response()->json($products);
     }
 
     /**
@@ -20,7 +30,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
